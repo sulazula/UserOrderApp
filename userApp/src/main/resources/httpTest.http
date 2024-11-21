@@ -1,0 +1,23 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+### GET request
+GET http://localhost:8081/users
+
+### GET request by ID
+GET localhost:8081/users/1
+
+### POST request add
+POST http://localhost:8081/users
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "John Doe",
+  "email": "john.doe@example.com"
+}
+
+### DELETE request
+DELETE http://localhost:8081/users/3
+Accept: application/json
