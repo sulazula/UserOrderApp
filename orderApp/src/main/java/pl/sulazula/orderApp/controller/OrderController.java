@@ -1,8 +1,11 @@
 package pl.sulazula.orderApp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.sulazula.orderApp.DTO.UserDto;
+import pl.sulazula.orderApp.clients.UserClient;
 import pl.sulazula.orderApp.model.Order;
 import pl.sulazula.orderApp.service.OrderService;
 
@@ -15,9 +18,25 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private UserClient userClient;
+
     @GetMapping
     public List<Order> getAllOrders() {
         return orderService.getOrders();
+    }
+
+    @GetMapping("/{orderId}/user")
+    public ResponseEntity<UserDto> getUserForOrder(@PathVariable Long orderId) {
+        Long userId = orderService.getUserIdInOrder(orderId)
+                .orElse(null);
+        if (userId == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        UserDto user = userClient.getUserById(userId);
+
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping("/{id}")

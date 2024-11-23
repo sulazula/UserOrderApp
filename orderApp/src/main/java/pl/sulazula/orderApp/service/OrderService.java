@@ -23,6 +23,13 @@ public class OrderService {
                 .findFirst();
     }
 
+    public Optional<Long> getUserIdInOrder(Long orderId){
+        return orders.stream()
+                .filter(order -> order.getId().equals(orderId))
+                .map(Order::getUserId)
+                .findFirst();
+    }
+
     public Order addOrder(Order order){
         orders.add(order);
 

@@ -1,0 +1,13 @@
+### GET feign test
+GET localhost:8082/orders/1/user
+
+### POST
+POST localhost:8082/orders
+Content-Type: application/json
+
+{
+  "id": 1,
+  "userId": 2,
+  "description": "123",
+  "quantity": 222
+}

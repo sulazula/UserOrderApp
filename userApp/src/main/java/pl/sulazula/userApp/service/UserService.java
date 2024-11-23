@@ -1,9 +1,7 @@
 package pl.sulazula.userApp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
-import pl.sulazula.userApp.client.UserClient;
 import pl.sulazula.userApp.model.User;
 
 import java.util.ArrayList;
@@ -13,9 +11,6 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final List<User> users = new ArrayList<>();
-
-    @Autowired
-    private UserClient userClient;
 
     public List<User> getUsers() {
         return users;
@@ -34,9 +29,5 @@ public class UserService {
 
     public boolean deleteUser(Long id) {
         return users.removeIf(user -> user.getId().equals(id));
-    }
-
-    public List<Long> getOrdersById(Long id) {
-        ...
     }
 }
